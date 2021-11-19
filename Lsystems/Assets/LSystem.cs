@@ -37,7 +37,7 @@ public class LSystem : MonoBehaviour
             {
                 if (c == 'F')
                 {
-                    Debug.Log(_n);
+                    
                     Debug.Log(c);
                     Debug.Log(_axiom);
                     
