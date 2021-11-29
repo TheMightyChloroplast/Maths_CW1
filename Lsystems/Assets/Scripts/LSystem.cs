@@ -23,7 +23,7 @@ public class LSystem : MonoBehaviour
 {
     
     [SerializeField] private GameObject branch; // holds the branch prefab
-    [SerializeField] private float length = 5; // how long the branch will be
+     private float _length = 5; // how long the branch will be
     [SerializeField] private double angle = 20; //angle 
     private string _axiom = "X"; //holds the initial position of the tree
     private int _iterations = 7; //number of iterations
@@ -40,7 +40,7 @@ public class LSystem : MonoBehaviour
 
     private GameObject _treeBranch;
     private bool _iterationIncrements;
-    
+    private bool _stochasticLsystem;
     
     private bool _angleButtonPressed;
   
@@ -128,12 +128,23 @@ public class LSystem : MonoBehaviour
             }
 
 
-
-
         }
 
 
-        
+
+        if (_stochasticLsystem)
+        {
+            for(int i = 0; i < _iterations; i++)
+            {
+                int ranAngle = Random.Range(10, 50);
+                angle = ranAngle;
+
+                int ranLength = Random.Range(30 , 40);
+                _length = ranLength;
+                
+            }
+            
+        }
     }
 
     //end of update
@@ -143,7 +154,8 @@ public class LSystem : MonoBehaviour
     {
         
         _currentSentence = _axiom; //assigns the value of "F" to currentSentence
-
+        
+        
         
         for(int i = 0; i < _iterations; i++){
             iterationsText.text = "this is the " + _iterations + " iteration";
@@ -185,7 +197,7 @@ public class LSystem : MonoBehaviour
             {
                 case 'F':
                     Vector3 initialPosition = transform.position;
-                    transform.Translate(Vector3.up * length);
+                    transform.Translate(Vector3.up * _length);
                     
                     _treeBranch = Instantiate(branch); //instantiates the branch
                     testGameLines.Enqueue(_treeBranch); //queues up the branches 
@@ -239,6 +251,7 @@ public class LSystem : MonoBehaviour
             ClearTree();
 
             //sets up the new parameter values
+            _length =5;
             _iterations = 5;
             angle = 25.7; 
             _axiom = "F";
@@ -257,7 +270,7 @@ public class LSystem : MonoBehaviour
             treeNumber.text = "This is tree 2";
             //cleans up the scene
             ClearTree();
-       
+            _length =15;
             _iterations = 5;
             angle = 20; 
             _axiom = "F";
@@ -274,7 +287,7 @@ public class LSystem : MonoBehaviour
             treeNumber.text = "This is tree 3";
             //cleans up the scene
             ClearTree();
-       
+            _length = 20;
             _iterations = 4;
             angle = 22.5; 
             _axiom = "F";
@@ -290,7 +303,7 @@ public class LSystem : MonoBehaviour
             treeNumber.text = "This is tree 4";
             //cleans up the scene
             ClearTree();
-
+            _length = 5;
             _iterations = 7;
             angle = 20; 
             _axiom = "X";
@@ -307,7 +320,7 @@ public class LSystem : MonoBehaviour
             treeNumber.text = "This is tree 5";
             //cleans up the scene
             ClearTree();
-      
+            _length = 5;
             _iterations = 7;
             angle = 25.7; 
             _axiom = "X";
@@ -325,7 +338,7 @@ public class LSystem : MonoBehaviour
             treeNumber.text = "This is tree 6";
             //cleans up the scene
             ClearTree();
-     
+            _length = 15;
             _iterations = 5;
             angle = 22.5; 
             _axiom = "X";
@@ -348,6 +361,7 @@ public class LSystem : MonoBehaviour
 
 
             //http://paulbourke.net/fractals/lsys/
+            _length = 5;
             _iterations = 5;
             angle = 35; 
             _axiom = "F";
@@ -363,29 +377,30 @@ public class LSystem : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
+            _stochasticLsystem = true;
             treeNumber.text = "This is tree 8";
             //cleans up the scene
             ClearTree();
-
-            int num = Random.Range(0, 101);
             _rules.Clear();
-
+        
+            int num = Random.Range(0, 101);
             if (num >= 50)
             {
                 _rules.Add('F', "F[+F][-F]F");
+                     
             }
             else if (num >= 21 && num <= 30)
             {
                 _rules.Add('F', "F[-F]F");
+                    
             }
             else
             {
                 _rules.Add('F', "F[+F]F");
+                    
             }
             //https://core.ac.uk/download/pdf/17236305.pdf
-            //algorithmicbotany.org/papers/abop/abop.pdf
             _iterations = 5;
-            angle = 22.5; 
             _axiom = "F";
 
             treeNumber.text = "This is tree 8";
@@ -393,20 +408,7 @@ public class LSystem : MonoBehaviour
             GenerateTree();
         }
     }
-
     
-    //increment parameters
-    public void IncrementAngle()
-    {
-        _angleButtonPressed = true;
-        angle += 5;
-
-    }
-
-    public void IncrementLength()
-    {
-        length += 2;
-    }
 
     //clears the instantiated branches to allow for a redraw
     private void ClearTree()
