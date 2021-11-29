@@ -19,24 +19,24 @@ public class TransformInfo
 
 public class LSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject leaf;
-    [SerializeField] private GameObject branch;
-    [SerializeField] private float length = 5;
-    [SerializeField] private double angle = 20;
+    
+    [SerializeField] private GameObject branch; // holds the branch prefab
+    [SerializeField] private float length = 5; // how long the branch will be
+    [SerializeField] private double angle = 20; //angle 
+    private string _axiom = "X"; //holds the initial position of the tree
+    private int _iterations = 7; //number of iterations
+    
     private Stack<TransformInfo> _stack;
     private Dictionary<char, string> _rules; //dictionary holds the rules of the tree
-   // public Quaternion angle;
+   
     private String _currentSentence;
     
-    //variables for the dictionary
 
-    private string _axiom = "X"; //holds the initial position of the tree
-
-    // private string _newSentence; //holds the current sentence
-    private StringBuilder _stringBuilder;
-    private Vector3 _resetPosition;
+   
     
-    private int _iterations = 7; //number of iterations
+    private StringBuilder _stringBuilder;
+    
+    
     public Queue<GameObject> testGameLines = new Queue<GameObject>();
 
     private GameObject _treeBranch;
