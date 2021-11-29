@@ -8,6 +8,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
+
 
 public class TransformInfo
 {
@@ -187,8 +189,6 @@ public class LSystem : MonoBehaviour
                     
                     _treeBranch = Instantiate(branch); //instantiates the branch
                     testGameLines.Enqueue(_treeBranch); //queues up the branches 
-                    _treeBranch.GetComponent<LineRenderer>().startColor = Color.blue;
-                    _treeBranch.GetComponent<LineRenderer>().endColor = Color.red;
                     _treeBranch.GetComponent<LineRenderer>().SetPosition(0, initialPosition);
                     _treeBranch.GetComponent<LineRenderer>().SetPosition(1, transform.position);
                     break;
@@ -234,6 +234,7 @@ public class LSystem : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            treeNumber.text = "This is tree 1";
             //cleans up the scene
             ClearTree();
 
@@ -245,7 +246,7 @@ public class LSystem : MonoBehaviour
             _rules.Clear();
             _rules.Add('F', "F[+F]F[-F]F");
 
-            treeNumber.text = "This is tree 1";
+            
             GenerateTree();
 
 
@@ -253,6 +254,7 @@ public class LSystem : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            treeNumber.text = "This is tree 2";
             //cleans up the scene
             ClearTree();
        
@@ -263,12 +265,13 @@ public class LSystem : MonoBehaviour
             _rules.Clear();
             _rules.Add('F', "F[+F]F[-F][F]");
             
-            treeNumber.text = "This is tree 2";
+           
             
             GenerateTree();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            treeNumber.text = "This is tree 3";
             //cleans up the scene
             ClearTree();
        
@@ -279,11 +282,12 @@ public class LSystem : MonoBehaviour
             _rules.Clear();
             _rules.Add('F', "FF-[-F+F+F]+[+F-F-F]");
             
-            treeNumber.text = "This is tree 3";
+           
             GenerateTree();
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            treeNumber.text = "This is tree 4";
             //cleans up the scene
             ClearTree();
 
@@ -295,11 +299,12 @@ public class LSystem : MonoBehaviour
             _rules.Add('X', "F[+X]F[-X]+X");
             _rules.Add('F', "FF");
             
-            treeNumber.text = "This is tree 4";
+            
             GenerateTree();
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
+            treeNumber.text = "This is tree 5";
             //cleans up the scene
             ClearTree();
       
@@ -311,12 +316,13 @@ public class LSystem : MonoBehaviour
             _rules.Add('X', "F[+X][-X]FX");
             _rules.Add('F', "FF");
             
-            treeNumber.text = "This is tree 5";
+           
             GenerateTree();
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
+            treeNumber.text = "This is tree 6";
             //cleans up the scene
             ClearTree();
      
@@ -328,14 +334,14 @@ public class LSystem : MonoBehaviour
             _rules.Add('X', "F-[[X]+X]+F[+FX]-X");
             _rules.Add('F', "FF");
             
-            treeNumber.text = "This is tree 6";
+           
             
             GenerateTree();
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            
+            treeNumber.text = "This is tree 7";
             //cleans up the scene
             ClearTree();
           
@@ -349,7 +355,7 @@ public class LSystem : MonoBehaviour
             _rules.Clear();
             _rules.Add('F', "F[+FF][-FF]F[-F][+F]F");
             
-            treeNumber.text = "This is tree 7";
+           
             
             GenerateTree();
             
@@ -357,19 +363,31 @@ public class LSystem : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
+            treeNumber.text = "This is tree 8";
             //cleans up the scene
             ClearTree();
-          //  transform.position = new Vector3(0, 0, 0);
 
-
-            //algorithmicbotany.org/papers/abop/abop.pdf
-            _iterations = 4;
-            angle = 90; 
-            _axiom = "F-F-F-F";
-            
+            int num = Random.Range(0, 101);
             _rules.Clear();
-            _rules.Add('F', "FF-F-F-F-F-F+F");
-            
+
+            if (num >= 50)
+            {
+                _rules.Add('F', "F[+F][-F]F");
+            }
+            else if (num >= 21 && num <= 30)
+            {
+                _rules.Add('F', "F[-F]F");
+            }
+            else
+            {
+                _rules.Add('F', "F[+F]F");
+            }
+            //https://core.ac.uk/download/pdf/17236305.pdf
+            //algorithmicbotany.org/papers/abop/abop.pdf
+            _iterations = 5;
+            angle = 22.5; 
+            _axiom = "F";
+
             treeNumber.text = "This is tree 8";
             
             GenerateTree();
