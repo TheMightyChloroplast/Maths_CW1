@@ -4,5 +4,29 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes: 
+  - enabled: 1
+    path: Assets/Scenes/Tree1.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Tree2.unity
+    guid: 2df4e4145d4be1e469c52b65f1be4106
+  - enabled: 1
+    path: Assets/Scenes/Tree3.unity
+    guid: 7f7f2e1e411596045a0b56374f244a29
+  - enabled: 1
+    path: Assets/Scenes/Tree4.unity
+    guid: 46d1865ad19e273428d0c855edc874fa
+  - enabled: 1
+    path: Assets/Scenes/Tree5.unity
+    guid: 4f4da28bcacbb3a419e3f69a70dc98fc
+  - enabled: 1
+    path: Assets/Scenes/Tree6.unity
+    guid: 730047c455dba9c43ac310d0ef152877
+  - enabled: 1
+    path: Assets/Scenes/Tree7.unity
+    guid: 395d65e7c69d41b4a8c64ccd054b3d96
+  - enabled: 1
+    path: Assets/Scenes/Tree8.unity
+    guid: b77e3396aad19e9478f2d63ec3da6f9d
   m_configObjects: {}
