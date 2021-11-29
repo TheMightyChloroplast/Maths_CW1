@@ -26,15 +26,12 @@ public class LSystem : MonoBehaviour
     private string _axiom = "X"; //holds the initial position of the tree
     private int _iterations = 7; //number of iterations
     
-    private Stack<TransformInfo> _stack;
+    private Stack<TransformInfo> _stack; //used to store the current position and rotation
     private Dictionary<char, string> _rules; //dictionary holds the rules of the tree
    
-    private String _currentSentence;
     
-
-   
-    
-    private StringBuilder _stringBuilder;
+    private String _currentSentence; // holds the expanded current sentence
+    private StringBuilder _stringBuilder; //used to build the tree
     
     
     public Queue<GameObject> testGameLines = new Queue<GameObject>();
@@ -42,8 +39,7 @@ public class LSystem : MonoBehaviour
     private GameObject _treeBranch;
     private bool _iterationIncrements;
     
-    private float speed = 50.0f;
-
+    
     private bool _angleButtonPressed;
   
   //UI text
@@ -135,10 +131,7 @@ public class LSystem : MonoBehaviour
         }
 
 
-        if (_angleButtonPressed)
-        {
-            GenerateTree();
-        }
+        
     }
 
     //end of update
@@ -147,24 +140,24 @@ public class LSystem : MonoBehaviour
     public void GenerateTree()
     {
         
-        _currentSentence = _axiom; //assigns the value of "F" to newsentence
+        _currentSentence = _axiom; //assigns the value of "F" to currentSentence
 
-        Debug.Log(_currentSentence);
+        
         for(int i = 0; i < _iterations; i++){
             iterationsText.text = "this is the " + _iterations + " iteration";
             {
                 foreach (char c in _currentSentence)
                 {
-                    //Loops through all the values in the _newsentence variable
+                    //Loops through all the character values in the _currentSentence variable
                     if (_rules.ContainsKey(c)) //if the rules contain this character in c
                     {
-                        _stringBuilder.Append(_rules[c]);
+                        _stringBuilder.Append(_rules[c]); //add the rules to the stringbuilder
 
                     }
                     else
                     {
 
-                        _stringBuilder.Append(c.ToString());
+                        _stringBuilder.Append(c.ToString()); //append the character to the string
                     }
 
                 }
@@ -172,8 +165,7 @@ public class LSystem : MonoBehaviour
 
 
             _currentSentence = _stringBuilder.ToString(); //stores the new values into the currentstring
-            _stringBuilder = new StringBuilder();
-            Debug.Log(_currentSentence);
+            _stringBuilder = new StringBuilder(); // clears the stringBuilder for next use
         }
         
         BuildTree();
@@ -184,7 +176,6 @@ public class LSystem : MonoBehaviour
     public void BuildTree()
     {
         transform.rotation = Quaternion.Euler(0,0,0) ;
-
         //loops through each character in the new sentence and carries out an action depending on the char found
         foreach (char c in _currentSentence)
         {
@@ -192,25 +183,23 @@ public class LSystem : MonoBehaviour
             {
                 case 'F':
                     Vector3 initialPosition = transform.position;
-                    
-                    
                     transform.Translate(Vector3.up * length);
                     
                     _treeBranch = Instantiate(branch); //instantiates the branch
-                    
                     testGameLines.Enqueue(_treeBranch); //queues up the branches 
-                    
-                   
+                    _treeBranch.GetComponent<LineRenderer>().startColor = Color.blue;
+                    _treeBranch.GetComponent<LineRenderer>().endColor = Color.red;
                     _treeBranch.GetComponent<LineRenderer>().SetPosition(0, initialPosition);
                     _treeBranch.GetComponent<LineRenderer>().SetPosition(1, transform.position);
-                    
                     break;
+                
                 
                 case 'X':
                     break;
-                
                 case '+':
                     transform.Rotate(Vector3.back * (float) angle);
+                    
+                  
                     break;
 
                 case '-':
@@ -247,11 +236,8 @@ public class LSystem : MonoBehaviour
         {
             //cleans up the scene
             ClearTree();
-            
-           // transform.position = new Vector3(0, 0, 0);
-         
 
-
+            //sets up the new parameter values
             _iterations = 5;
             angle = 25.7; 
             _axiom = "F";
@@ -269,11 +255,7 @@ public class LSystem : MonoBehaviour
         {
             //cleans up the scene
             ClearTree();
-         //   transform.position = new Vector3(0, 0, 0);
-          
-
-
-
+       
             _iterations = 5;
             angle = 20; 
             _axiom = "F";
@@ -289,10 +271,7 @@ public class LSystem : MonoBehaviour
         {
             //cleans up the scene
             ClearTree();
-          //  transform.position = new Vector3(0, 0, 0);
-          
-
-
+       
             _iterations = 4;
             angle = 22.5; 
             _axiom = "F";
@@ -308,10 +287,6 @@ public class LSystem : MonoBehaviour
             //cleans up the scene
             ClearTree();
 
-          //  transform.position = new Vector3(0, 0, 0);
-          
-
-            
             _iterations = 7;
             angle = 20; 
             _axiom = "X";
@@ -327,9 +302,7 @@ public class LSystem : MonoBehaviour
         {
             //cleans up the scene
             ClearTree();
-           // transform.position = new Vector3(0, 0, 0);
-
-            
+      
             _iterations = 7;
             angle = 25.7; 
             _axiom = "X";
@@ -346,11 +319,7 @@ public class LSystem : MonoBehaviour
         {
             //cleans up the scene
             ClearTree();
-          //  transform.position = new Vector3(0, 0, 0);
-           
-
-
-
+     
             _iterations = 5;
             angle = 22.5; 
             _axiom = "X";
@@ -369,10 +338,10 @@ public class LSystem : MonoBehaviour
             
             //cleans up the scene
             ClearTree();
-          //  transform.position = new Vector3(0, 0, 0);
+          
 
 
-//http://paulbourke.net/fractals/lsys/
+            //http://paulbourke.net/fractals/lsys/
             _iterations = 5;
             angle = 35; 
             _axiom = "F";
