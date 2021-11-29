@@ -19,6 +19,7 @@ public class TransformInfo
 
 public class LSystem : MonoBehaviour
 {
+    [SerializeField] private GameObject leaf;
     [SerializeField] private GameObject branch;
     [SerializeField] private float length = 5;
     [SerializeField] private double angle = 20;
@@ -41,6 +42,9 @@ public class LSystem : MonoBehaviour
     private GameObject _treeBranch;
     private bool _iterationIncrements;
     
+    private float speed = 50.0f;
+
+    private bool _angleButtonPressed;
   
   //UI text
 
@@ -59,8 +63,8 @@ public class LSystem : MonoBehaviour
             {'X', "F[+X][-X]FX"}
         };
         _stringBuilder = new StringBuilder();
-        
-      
+
+        _angleButtonPressed = false;
         
         //generates tree
         GenerateTree();
@@ -69,6 +73,7 @@ public class LSystem : MonoBehaviour
 
     public void Update()
     {
+        
         _iterationIncrements = false;
 
         ChangeScene(); //changes the scene 
@@ -127,6 +132,12 @@ public class LSystem : MonoBehaviour
 
 
 
+        }
+
+
+        if (_angleButtonPressed)
+        {
+            GenerateTree();
         }
     }
 
@@ -235,13 +246,9 @@ public class LSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //cleans up the scene
-            foreach (var o in testGameLines) //destroys lines
-            {
-                Destroy(o);
-                transform.position = new Vector3(0, 0, 0);
-               
-            }
-            transform.position = new Vector3(0, 0, 0);
+            ClearTree();
+            
+           // transform.position = new Vector3(0, 0, 0);
          
 
 
@@ -252,7 +259,7 @@ public class LSystem : MonoBehaviour
             _rules.Clear();
             _rules.Add('F', "F[+F]F[-F]F");
 
-            treeNumber.text = "This is tree A";
+            treeNumber.text = "This is tree 1";
             GenerateTree();
 
 
@@ -261,13 +268,8 @@ public class LSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             //cleans up the scene
-            foreach (var o in testGameLines) //destroys lines
-            {
-                Destroy(o);
-                transform.position = new Vector3(0, 0, 0);
-               
-            }
-            transform.position = new Vector3(0, 0, 0);
+            ClearTree();
+         //   transform.position = new Vector3(0, 0, 0);
           
 
 
@@ -279,21 +281,15 @@ public class LSystem : MonoBehaviour
             _rules.Clear();
             _rules.Add('F', "F[+F]F[-F][F]");
             
-            treeNumber.text = "This is tree B";
+            treeNumber.text = "This is tree 2";
             
             GenerateTree();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             //cleans up the scene
-            foreach (var o in testGameLines) //destroys lines
-            {
-                Destroy(o);
-                transform.position = new Vector3(0, 0, 0);
-               
-            }
-
-            transform.position = new Vector3(0, 0, 0);
+            ClearTree();
+          //  transform.position = new Vector3(0, 0, 0);
           
 
 
@@ -304,21 +300,15 @@ public class LSystem : MonoBehaviour
             _rules.Clear();
             _rules.Add('F', "FF-[-F+F+F]+[+F-F-F]");
             
-            treeNumber.text = "This is tree C";
+            treeNumber.text = "This is tree 3";
             GenerateTree();
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             //cleans up the scene
-            foreach (var o in testGameLines) //destroys lines
-            {
-                Destroy(o);
-                transform.position = new Vector3(0, 0, 0);
-                
-               
-            }
+            ClearTree();
 
-            transform.position = new Vector3(0, 0, 0);
+          //  transform.position = new Vector3(0, 0, 0);
           
 
             
@@ -330,19 +320,14 @@ public class LSystem : MonoBehaviour
             _rules.Add('X', "F[+X]F[-X]+X");
             _rules.Add('F', "FF");
             
-            treeNumber.text = "This is tree D";
+            treeNumber.text = "This is tree 4";
             GenerateTree();
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             //cleans up the scene
-            foreach (var o in testGameLines) //destroys lines
-            {
-                Destroy(o);
-                transform.position = new Vector3(0, 0, 0);
-               
-            }
-            transform.position = new Vector3(0, 0, 0);
+            ClearTree();
+           // transform.position = new Vector3(0, 0, 0);
 
             
             _iterations = 7;
@@ -353,20 +338,15 @@ public class LSystem : MonoBehaviour
             _rules.Add('X', "F[+X][-X]FX");
             _rules.Add('F', "FF");
             
-            treeNumber.text = "This is tree E";
+            treeNumber.text = "This is tree 5";
             GenerateTree();
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             //cleans up the scene
-            foreach (var o in testGameLines) //destroys lines
-            {
-                Destroy(o);
-                transform.position = new Vector3(0, 0, 0);
-               
-            }
-            transform.position = new Vector3(0, 0, 0);
+            ClearTree();
+          //  transform.position = new Vector3(0, 0, 0);
            
 
 
@@ -379,7 +359,7 @@ public class LSystem : MonoBehaviour
             _rules.Add('X', "F-[[X]+X]+F[+FX]-X");
             _rules.Add('F', "FF");
             
-            treeNumber.text = "This is tree F";
+            treeNumber.text = "This is tree 6";
             
             GenerateTree();
         }
@@ -388,17 +368,11 @@ public class LSystem : MonoBehaviour
         {
             
             //cleans up the scene
-            foreach (var o in testGameLines) //destroys lines
-            {
-                Destroy(o);
-                transform.position = new Vector3(0, 0, 0);
-               
-            }
-            transform.position = new Vector3(0, 0, 0);
-           
+            ClearTree();
+          //  transform.position = new Vector3(0, 0, 0);
 
 
-
+//http://paulbourke.net/fractals/lsys/
             _iterations = 5;
             angle = 35; 
             _axiom = "F";
@@ -406,7 +380,7 @@ public class LSystem : MonoBehaviour
             _rules.Clear();
             _rules.Add('F', "F[+FF][-FF]F[-F][+F]F");
             
-            treeNumber.text = "This is tree G";
+            treeNumber.text = "This is tree 7";
             
             GenerateTree();
             
@@ -414,7 +388,22 @@ public class LSystem : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
+            //cleans up the scene
+            ClearTree();
+          //  transform.position = new Vector3(0, 0, 0);
+
+
+            //algorithmicbotany.org/papers/abop/abop.pdf
+            _iterations = 4;
+            angle = 90; 
+            _axiom = "F-F-F-F";
             
+            _rules.Clear();
+            _rules.Add('F', "FF-F-F-F-F-F+F");
+            
+            treeNumber.text = "This is tree 8";
+            
+            GenerateTree();
         }
     }
 
@@ -422,14 +411,26 @@ public class LSystem : MonoBehaviour
     //increment parameters
     public void IncrementAngle()
     {
-        
+        _angleButtonPressed = true;
+        angle += 5;
+
     }
 
     public void IncrementLength()
     {
-        
+        length += 2;
     }
- 
+
+    //clears the instantiated branches to allow for a redraw
+    private void ClearTree()
+    {
+        foreach (var o in testGameLines) //destroys lines
+        {
+            Destroy(o);
+            transform.position = new Vector3(0, 0, 0);
+               
+        }
+    }
 
  
 }
