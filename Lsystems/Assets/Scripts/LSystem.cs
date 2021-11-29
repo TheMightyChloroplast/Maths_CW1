@@ -246,6 +246,7 @@ public class LSystem : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            _stochasticLsystem = false;
             treeNumber.text = "This is tree 1";
             //cleans up the scene
             ClearTree();
@@ -267,6 +268,7 @@ public class LSystem : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            _stochasticLsystem = false;
             treeNumber.text = "This is tree 2";
             //cleans up the scene
             ClearTree();
@@ -284,6 +286,7 @@ public class LSystem : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            _stochasticLsystem = false;
             treeNumber.text = "This is tree 3";
             //cleans up the scene
             ClearTree();
@@ -300,6 +303,7 @@ public class LSystem : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            _stochasticLsystem = false;
             treeNumber.text = "This is tree 4";
             //cleans up the scene
             ClearTree();
@@ -317,6 +321,7 @@ public class LSystem : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
+            _stochasticLsystem = false;
             treeNumber.text = "This is tree 5";
             //cleans up the scene
             ClearTree();
@@ -335,6 +340,7 @@ public class LSystem : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
+            _stochasticLsystem = false;
             treeNumber.text = "This is tree 6";
             //cleans up the scene
             ClearTree();
@@ -354,6 +360,7 @@ public class LSystem : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
+            _stochasticLsystem = false;
             treeNumber.text = "This is tree 7";
             //cleans up the scene
             ClearTree();
